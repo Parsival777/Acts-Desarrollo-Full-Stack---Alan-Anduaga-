@@ -1,0 +1,325 @@
+/* Reseteo básico y fuentes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos del cuerpo de la página */
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f6f0;
+}
+
+
+/* Contenedor principal del encabezado */
+header {
+    background: linear-gradient(135deg, #6B4423 0%, #3d2817 100%);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* Título principal "Power Café" */
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+/* Subtítulo "Auténtico sabor italiano..." */
+header > p:first-of-type {
+    font-size: 1.3em;
+    font-style: italic;
+    margin-bottom: 40px;
+    color: #f4e4c1;
+}
+
+/* Título "Acerca de Nosotros" */
+header h2 {
+    font-size: 2em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #f4e4c1;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* Párrafos dentro del encabezado */
+header p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Títulos de Misión y Visión */
+header h3 {
+    font-size: 1.5em;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #f4e4c1;
+}
+
+
+/* Contenedor de la sección de productos */
+section:first-of-type {
+    padding: 60px 20px;
+    background-color: white;
+}
+
+/* Título "Nuestros Productos Destacados" */
+section h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #6B4423;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+/* Línea decorativa debajo del título */
+section h2::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background-color: #d4a574;
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+/* Tarjetas de cada producto individual */
+section:first-of-type > div {
+    background-color: #f9f6f0;
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #e8dcc8;
+    text-align: center;
+}
+
+/* Efecto hover en las tarjetas de productos */
+section:first-of-type > div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(107, 68, 35, 0.2);
+}
+
+/* Nombres de los productos (h3) */
+section:first-of-type h3 {
+    font-size: 1.8em;
+    color: #6B4423;
+    margin-bottom: 15px;
+}
+
+/* Descripciones de los productos */
+section:first-of-type p {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+/* Imágenes de los productos */
+section:first-of-type img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 15px;
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Contenedor de la sección de contacto */
+section:nth-of-type(2) {
+    background: linear-gradient(135deg, #f4e4c1 0%, #e8dcc8 100%);
+    padding: 60px 20px;
+}
+
+/* Título "Contáctanos" */
+section:nth-of-type(2) h2 {
+    color: #6B4423;
+}
+
+/* Texto descriptivo del formulario */
+section:nth-of-type(2) > p {
+    text-align: center;
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Contenedor del formulario */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Etiquetas del formulario (Nombre, Email, Mensaje) */
+form label {
+    display: block;
+    font-weight: bold;
+    color: #6B4423;
+    margin-bottom: 8px;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+/* Campos de entrada de texto y área de texto */
+form input,
+form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #d4a574;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: 'Georgia', serif;
+    transition: border-color 0.3s ease;
+    resize: none;
+}
+
+/* Efecto cuando el usuario hace clic en los campos */
+form input:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #6B4423;
+    box-shadow: 0 0 5px rgba(107, 68, 35, 0.3);
+}
+
+/* Botón de enviar mensaje */
+form button {
+    width: 100%;
+    background-color: #6B4423;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efecto hover del botón enviar */
+form button:hover {
+    background-color: #3d2817;
+    transform: scale(1.02);
+}
+
+
+
+/* Contenedor del pie de página */
+footer {
+    background-color: #3d2817;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Título "Power Café" en el footer */
+footer h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+/* Párrafos del footer */
+footer p {
+    margin: 15px 0;
+}
+
+/* Enlaces de redes sociales */
+footer a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 10px 20px;
+    background-color: #6B4423;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efecto hover en enlaces de redes sociales */
+footer a:hover {
+    background-color: #d4a574;
+    transform: scale(1.1);
+}
+
+/* Texto del copyright */
+footer p:last-child {
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #d4a574;
+    border-top: 1px solid #6B4423;
+    padding-top: 20px;
+}
+
+/*Adaptacion a Celulares*/
+@media screen and (max-width: 480px) {
+    
+    header {
+        padding: 40px 15px;
+    }    
+   
+    header h1 {
+        font-size: 1.8em;
+        letter-spacing: 1px;
+    }    
+    
+    header > p:first-of-type {
+        font-size: 1em;
+    }    
+    
+    header h2 {
+        font-size: 1.6em;
+    }    
+    
+    header h3 {
+        font-size: 1.3em;
+    }    
+    
+    section h2 {
+        font-size: 1.8em;
+    }    
+    
+    section:first-of-type > div {
+        padding: 20px;
+    }    
+    
+    section:first-of-type h3 {
+        font-size: 1.4em;
+    }    
+   
+    section:first-of-type img {
+        width: 100%;
+        max-width: 250px;
+    }    
+    
+    form {
+        padding: 20px;
+    }    
+    
+    form input,
+    form textarea {
+        padding: 10px;
+        font-size: 0.95em;
+    }    
+    
+    form button {
+        padding: 12px;
+    }
+        
+    footer h3 {
+        font-size: 1.6em;
+    }
+}
