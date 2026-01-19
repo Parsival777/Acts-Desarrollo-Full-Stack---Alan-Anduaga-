@@ -1,13 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Mis Tareas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio | Alan Anduaga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* 1. Estilos Generales */
+        :root {
+            --primary-color: #2563eb; /* Azul moderno */
+            --bg-color: #f8fafc;      /* Fondo claro */
+            --card-bg: #ffffff;       /* Fondo de tarjetas */
+            --text-color: #1e293b;    /* Texto oscuro */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* 2. Encabezado (Hero Section) */
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* 3. Contenedor Principal */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: 1.8rem;
+            color: #334155;
+        }
+
+        /* 4. Grid de Proyectos (Tarjetas) */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-tag {
+            background-color: #dbeafe;
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+
+        /* 5. Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a mi portafolio</h1>
-    <p>Aquí están mis actividades:</p>
-    <ul>
-        <li><a href="Act1/index.html">Ir a la Actividad 1</a></li>
-    </ul>
+
+    <header>
+        <h1>Alan Anduaga</h1>
+        <p>Desarrollador Full Stack en formación | Matrícula: AL07016120</p>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Mis Actividades</h2>
+
+        <div class="projects-grid">
+            
+            <a href="Act1/index.html" class="card">
+                <div class="card-body">
+                    <span class="card-tag">HTML / CSS</span>
+                    <h3 class="card-title">Actividad 1</h3>
+                    <p class="card-desc">
+                        Introducción al desarrollo web. Estructura básica y primeros estilos.
+                    </p>
+                </div>
+            </a>
+
+            </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Portafolio de Desarrollo Full Stack</p>
+    </footer>
+
 </body>
 </html>
