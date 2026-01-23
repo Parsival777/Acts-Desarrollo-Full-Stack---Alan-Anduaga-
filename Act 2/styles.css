@@ -1,0 +1,272 @@
+/*ESTILOS GENERALES */
+
+/* Reseteo básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos del cuerpo */
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f6f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*ENCABEZADO */
+
+header {
+    background: linear-gradient(135deg, #6B4423 0%, #3d2817 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+header p {
+    font-size: 1.2em;
+    font-style: italic;
+    color: #f4e4c1;
+}
+
+/*CONTENEDOR PRINCIPAL*/
+
+main {
+    flex: 1;
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.contenedor-tareas {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor-tareas h2 {
+    text-align: center;
+    font-size: 2em;
+    color: #6B4423;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #d4a574;
+    padding-bottom: 10px;
+}
+
+/*MENSAJE DE ERROR*/
+
+.mensaje-error {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border-left: 4px solid #c62828;
+    display: none;
+}
+
+.mensaje-error.mostrar {
+    display: block;
+}
+
+/*FORMULARIO AGREGAR TAREA*/
+
+.agregar-tarea {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+#input-tarea {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #d4a574;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: 'Georgia', serif;
+    transition: border-color 0.3s ease;
+}
+
+#input-tarea:focus {
+    outline: none;
+    border-color: #6B4423;
+    box-shadow: 0 0 5px rgba(107, 68, 35, 0.3);
+}
+
+#btn-agregar {
+    background-color: #6B4423;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#btn-agregar:hover {
+    background-color: #3d2817;
+    transform: scale(1.05);
+}
+
+/*LISTA DE TAREAS*/
+
+#lista-tareas {
+    list-style: none;
+}
+
+.tarea-item {
+    background-color: #f9f6f0;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 2px solid #e8dcc8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarea-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(107, 68, 35, 0.15);
+}
+
+/* Texto de la tarea */
+.tarea-texto {
+    flex: 1;
+    font-size: 1.1em;
+    color: #333;
+    word-wrap: break-word;
+}
+
+/* Tarea completada */
+.tarea-item.completada .tarea-texto {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Contenedor de botones */
+.tarea-botones {
+    display: flex;
+    gap: 8px;
+}
+
+/* Botones de acción */
+.btn-completar,
+.btn-editar,
+.btn-eliminar {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Botón completar */
+.btn-completar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-completar:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+/* Botón editar */
+.btn-editar {
+    background-color: #2196F3;
+    color: white;
+}
+
+.btn-editar:hover {
+    background-color: #1976D2;
+    transform: scale(1.05);
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-eliminar:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+/*PIE DE PÁGINA*/
+
+footer {
+    background-color: #3d2817;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+footer p {
+    font-size: 0.9em;
+    color: #d4a574;
+}
+
+
+
+
+/* Celulares - 480px*/
+@media screen and (max-width: 480px) {
+    header h1 {
+        font-size: 1.8em;
+        letter-spacing: 1px;
+    }
+
+    header p {
+        font-size: 0.9em;
+    }
+
+    main {
+        padding: 20px 10px;
+    }
+
+    .contenedor-tareas {
+        padding: 20px;
+    }
+
+    .contenedor-tareas h2 {
+        font-size: 1.4em;
+    }
+
+    .tarea-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .tarea-botones {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .btn-completar,
+    .btn-editar,
+    .btn-eliminar {
+        flex: 1;
+        padding: 10px;
+    }
+}

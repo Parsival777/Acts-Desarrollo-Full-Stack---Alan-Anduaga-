@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Café - Gestión de Tareas para Empleados</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>    
+    <header>
+        <h1>Power Café</h1>
+        <p>Panel de Gestión de Tareas para Empleados</p>
+    </header>
+    
+    <main>
+        <div class="contenedor-tareas">
+            <h2>Mis Tareas Diarias</h2>
+            
+            <!-- Mensaje de error (oculto por defecto) -->
+            <div id="mensaje-error" class="mensaje-error"></div>
+            
+            <!-- Formulario para agregar tareas -->
+            <div class="agregar-tarea">
+                <input 
+                    type="text" 
+                    id="input-tarea" 
+                    placeholder="Escribe una nueva tarea..."
+                    maxlength="100"
+                >
+                <button id="btn-agregar">Agregar Tarea</button>
+            </div>
+
+            <!-- Lista de tareas -->
+            <ul id="lista-tareas">
+                <!-- Las tareas se agregarán aquí dinámicamente -->
+            </ul>
+        </div>
+    </main>
+
+    
+    <footer>
+        <p>&copy; 2026 Power Café. Sistema de Gestión para Empleados</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
