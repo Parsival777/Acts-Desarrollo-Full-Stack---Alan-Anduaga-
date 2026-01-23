@@ -59,10 +59,10 @@
             color: #334155;
         }
 
-        /* 4. Grid de Proyectos (Tarjetas) */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        /* 4. Contenedor de Proyectos en vertical */
+        .projects-container {
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
         }
 
@@ -130,7 +130,7 @@
     <div class="container">
         <h2 class="section-title">Mis Actividades</h2>
 
-        <div class="projects-grid">
+        <div class="projects-container">
             
             <a href="Act1/index.html" class="card">
                 <div class="card-body">
