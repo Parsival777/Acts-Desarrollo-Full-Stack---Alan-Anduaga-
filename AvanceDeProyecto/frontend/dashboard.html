@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Taller</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Reparaciones Pendientes</h1>
+        <div class="form-group">
+            <input type="text" id="vehiculo" placeholder="Ej: Nissan X-Trail 2016">
+            <input type="text" id="descripcion" placeholder="Ej: Cambio de alternador">
+            <button onclick="agregarReparacion()">Agregar Orden</button>
+        </div>
+        <ul id="listaReparaciones"></ul>
+        <button onclick="logout()" style="background-color: #e74c3c;">Cerrar Sesión</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
