@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = '/api';
 
 
 async function registrar() {
@@ -142,3 +142,4 @@ async function eliminar(id) {
 if (window.location.pathname.includes('dashboard.html')) {
     cargarReparaciones();
 }
+
