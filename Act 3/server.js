@@ -11,18 +11,22 @@ app.use(express.json());
 
 const usuarios = [];
 
-async function obtenerTareas() {
+
+async function obtenerJugadores() {
     try {
-        const data = await fs.readFile('tareas.json', 'utf8');
+        const data = await fs.readFile('jugadores.json', 'utf8');
         return JSON.parse(data);
     } catch (error) {
         return [];
     }
 }
 
-async function guardarTareas(tareas) {
-    await fs.writeFile('tareas.json', JSON.stringify(tareas, null, 2));
+
+async function guardarJugadores(jugadores) {
+    await fs.writeFile('jugadores.json', JSON.stringify(jugadores, null, 2));
 }
+
+
 
 app.post('/register', async (req, res, next) => {
     try {
@@ -53,6 +57,7 @@ app.post('/login', async (req, res, next) => {
     }
 });
 
+
 function autenticarToken(req, res, next) {
     const token = req.headers['authorization'];
     if (!token) return res.status(401).send('Acceso denegado. Token requerido.');
@@ -64,59 +69,66 @@ function autenticarToken(req, res, next) {
     });
 }
 
-app.get('/tareas', autenticarToken, async (req, res, next) => {
+
+
+
+app.get('/jugadores', autenticarToken, async (req, res, next) => {
     try {
-        const tareas = await obtenerTareas();
-        res.json(tareas);
+        const jugadores = await obtenerJugadores();
+        res.json(jugadores);
     } catch (error) {
         next(error);
     }
 });
 
-app.post('/tareas', autenticarToken, async (req, res, next) => {
+
+app.post('/jugadores', autenticarToken, async (req, res, next) => {
     try {
-        const tareas = await obtenerTareas();
-        const nuevaTarea = {
+        const jugadores = await obtenerJugadores();
+        const nuevoJugador = {
             id: Date.now().toString(),
-            titulo: req.body.titulo,
-            descripcion: req.body.descripcion
+            nombre: req.body.nombre,         
+            seleccion: req.body.seleccion    
         };
-        tareas.push(nuevaTarea);
-        await guardarTareas(tareas);
-        res.status(201).send('Tarea creada exitosamente');
+        jugadores.push(nuevoJugador);
+        await guardarJugadores(jugadores);
+        res.status(201).send('Jugador registrado exitosamente');
     } catch (error) {
         next(error);
     }
 });
 
-app.put('/tareas/:id', autenticarToken, async (req, res, next) => {
+
+app.put('/jugadores/:id', autenticarToken, async (req, res, next) => {
     try {
-        const tareas = await obtenerTareas();
-        const index = tareas.findIndex(t => t.id === req.params.id);
+        const jugadores = await obtenerJugadores();
+        const index = jugadores.findIndex(j => j.id === req.params.id);
 
-        if (index === -1) return res.status(404).send('Tarea no encontrada');
+        if (index === -1) return res.status(404).send('Jugador no encontrado');
 
-        tareas[index] = { ...tareas[index], ...req.body, id: req.params.id };
-        await guardarTareas(tareas);
-        res.send('Tarea actualizada exitosamente');
+        jugadores[index] = { ...jugadores[index], ...req.body, id: req.params.id };
+        await guardarJugadores(jugadores);
+        res.send('Registro del jugador actualizado exitosamente');
     } catch (error) {
         next(error);
     }
 });
 
-app.delete('/tareas/:id', autenticarToken, async (req, res, next) => {
+
+app.delete('/jugadores/:id', autenticarToken, async (req, res, next) => {
     try {
-        const tareas = await obtenerTareas();
-        const nuevasTareas = tareas.filter(t => t.id !== req.params.id);
+        const jugadores = await obtenerJugadores();
+        const nuevosJugadores = jugadores.filter(j => j.id !== req.params.id);
 
-        if (tareas.length === nuevasTareas.length) return res.status(404).send('Tarea no encontrada');
+        if (jugadores.length === nuevosJugadores.length) return res.status(404).send('Jugador no encontrado');
 
-        await guardarTareas(nuevasTareas);
-        res.send('Tarea eliminada exitosamente');
+        await guardarJugadores(nuevosJugadores);
+        res.send('Jugador eliminado del registro exitosamente');
     } catch (error) {
         next(error);
     }
 });
+
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
