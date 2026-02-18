@@ -1,4 +1,4 @@
-API de Registro de Jugadores con Node.js y Express
+# API de Registro de Jugadores con Node.js y Express
 
 Este proyecto es el cerebro o la parte trasera (backend) de una aplicación para gestionar un registro de jugadores de fútbol. Está creado con Node.js y Express, y en lugar de usar una base de datos compleja, guarda toda la información directamente en un archivo de texto llamado jugadores.json para mantener las cosas súper simples. Además, cuenta con un sistema de seguridad basado en Tokens (JWT) para asegurar que solo los usuarios registrados puedan ver, crear o borrar información.
 
