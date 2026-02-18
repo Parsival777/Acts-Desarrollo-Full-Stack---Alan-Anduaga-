@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1771271402938",
+    "nombre": "Lionel Messi",
+    "seleccion": "Argentina"
+  },
+  {
+    "id": "1771271459799",
+    "nombre": "Cristiano Ronaldo",
+    "seleccion": "Portugal"
+  },
+  {
+    "id": "1771352723340",
+    "nombre": "Emiliano Martínez",
+    "seleccion": "Argentina"
+  },
+  {
+    "id": "1771353099554",
+    "nombre": "Bruno Fernandes",
+    "seleccion": "Portugal"
+  },
+  {
+    "id": "1771436064709",
+    "nombre": "Diego Armando Maradona",
+    "seleccion": "Argentina"
+  }
+]
