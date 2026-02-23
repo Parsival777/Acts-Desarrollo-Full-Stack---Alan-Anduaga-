@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Paddock Pro | Ultimate Manager</title>
     <link rel="stylesheet" href="./css/styles.css">
+    <style>
+        
+        select {
+            padding: 14px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+        }
+        select:focus { border-color: var(--primary-red); }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .form-grid input, .form-grid select, .form-grid button {
+            width: 100%;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .btn-grid { grid-column: span 2; }
+    </style>
 </head>
 <body>
 
@@ -28,11 +54,19 @@
         <h1>Centro de Comando</h1>
         <h2>Gestión de Pilotos</h2>
         
-        <form id="pilotoForm" style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <form id="pilotoForm" class="form-grid">
             <input type="text" id="nombrePiloto" placeholder="Nombre del Piloto" required>
             <input type="text" id="escuderiaPiloto" placeholder="Escudería (Ej. Ferrari)" required>
-            <input type="number" id="numeroPiloto" placeholder="N°" required style="width: 80px;">
-            <button type="submit" class="btn btn-primary" style="margin: 0; width: auto; padding: 0 20px;">Agregar</button>
+            
+            <input type="number" id="numeroPiloto" placeholder="Número (1-99)" min="1" max="99" required>
+            
+            <input type="number" id="titulosPiloto" placeholder="Títulos Mundiales" min="0" required>
+            <select id="estadoPiloto" required>
+                <option value="Activo">Estado: Activo</option>
+                <option value="Retirado">Estado: Retirado</option>
+            </select>
+            
+            <button type="submit" class="btn btn-primary btn-grid">Agregar a la Parrilla</button>
         </form>
 
         <table class="f1-table">
@@ -40,7 +74,9 @@
                 <tr>
                     <th>Piloto</th>
                     <th>Escudería</th>
-                    <th>Número</th>
+                    <th>N°</th>
+                    <th>Títulos</th>
+                    <th>Estado</th>
                     <th>Acción</th>
                 </tr>
             </thead>
