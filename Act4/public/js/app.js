@@ -10,14 +10,17 @@ const messageDiv = document.getElementById('message');
 const logoutBtn = document.getElementById('logoutBtn');
 
 const pilotoForm = document.getElementById('pilotoForm');
+const formSubmitBtn = pilotoForm.querySelector('button[type="submit"]');
 const nombrePilotoInput = document.getElementById('nombrePiloto');
 const escuderiaPilotoInput = document.getElementById('escuderiaPiloto');
 const numeroPilotoInput = document.getElementById('numeroPiloto');
-
 const titulosPilotoInput = document.getElementById('titulosPiloto');
 const estadoPilotoInput = document.getElementById('estadoPiloto');
 
 const pilotosList = document.getElementById('pilotosList');
+
+
+let pilotoEditandoId = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
@@ -92,8 +95,7 @@ pilotoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
 
-    
-    const nuevoPiloto = {
+    const pilotoData = {
         nombre: nombrePilotoInput.value,
         escuderia: escuderiaPilotoInput.value,
         numero: parseInt(numeroPilotoInput.value),
@@ -101,14 +103,18 @@ pilotoForm.addEventListener('submit', async (e) => {
         estado: estadoPilotoInput.value
     };
 
+    
+    const url = pilotoEditandoId ? `/api/pilotos/${pilotoEditandoId}` : '/api/pilotos';
+    const metodo = pilotoEditandoId ? 'PUT' : 'POST';
+
     try {
-        const response = await fetch('/api/pilotos', {
-            method: 'POST',
+        const response = await fetch(url, {
+            method: metodo,
             headers: { 
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}` 
             },
-            body: JSON.stringify(nuevoPiloto)
+            body: JSON.stringify(pilotoData)
         });
 
         if (response.ok) {
@@ -118,10 +124,16 @@ pilotoForm.addEventListener('submit', async (e) => {
             numeroPilotoInput.value = '';
             titulosPilotoInput.value = '';
             estadoPilotoInput.value = 'Activo';
+            
+            pilotoEditandoId = null;
+            formSubmitBtn.innerText = 'Agregar a la Parrilla';
+            formSubmitBtn.classList.remove('btn-secondary');
+            formSubmitBtn.classList.add('btn-primary');
+            
             obtenerPilotos();
         } else {
             if(response.status === 401) return logoutForzado();
-            alert('Error al registrar piloto.');
+            alert('Error al guardar piloto.');
         }
     } catch (error) {
         console.error(error);
@@ -147,6 +159,27 @@ async function obtenerPilotos() {
     } catch (error) {
         console.error(error);
     }
+}
+
+
+window.editarPiloto = function(id, nombre, escuderia, numero, titulos, estado) {
+    
+    nombrePilotoInput.value = nombre;
+    escuderiaPilotoInput.value = escuderia;
+    numeroPilotoInput.value = numero;
+    titulosPilotoInput.value = titulos || 0;
+    estadoPilotoInput.value = estado || 'Activo';
+    
+    
+    pilotoEditandoId = id;
+    
+    
+    formSubmitBtn.innerText = 'Guardar Cambios';
+    formSubmitBtn.classList.remove('btn-primary');
+    formSubmitBtn.classList.add('btn-secondary');
+    
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 async function eliminarPiloto(id) {
@@ -182,8 +215,11 @@ function renderizarTabla(pilotos) {
     pilotos.forEach(piloto => {
         const tr = document.createElement('tr');
         
-        
         const estadoColor = piloto.estado === 'Activo' ? '#10B981' : '#D50000';
+        
+        
+        const nombreSeguro = piloto.nombre.replace(/'/g, "\\'");
+        const escuderiaSegura = piloto.escuderia.replace(/'/g, "\\'");
         
         tr.innerHTML = `
             <td style="font-weight: 600;">${piloto.nombre}</td>
@@ -192,6 +228,8 @@ function renderizarTabla(pilotos) {
             <td>🏆 ${piloto.titulos || 0}</td>
             <td style="color: ${estadoColor}; font-weight: 600; font-size: 0.85rem;">${piloto.estado || 'Activo'}</td>
             <td>
+                <button onclick="editarPiloto('${piloto._id}', '${nombreSeguro}', '${escuderiaSegura}', ${piloto.numero}, ${piloto.titulos || 0}, '${piloto.estado || 'Activo'}')" class="btn btn-secondary" style="padding: 6px 10px; margin: 0 5px 0 0; font-size: 12px; border-color: #3B82F6; color: #3B82F6;">Editar</button>
+                
                 <button onclick="eliminarPiloto('${piloto._id}')" class="btn btn-secondary" style="padding: 6px 10px; margin: 0; font-size: 12px; border-color: var(--border-color); color: var(--primary-red);">Retirar</button>
             </td>
         `;
