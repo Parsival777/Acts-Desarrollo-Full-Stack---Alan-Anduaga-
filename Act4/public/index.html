@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Gestión de Productos</title>
+    <title>Login - F1 Paddock</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,15 +36,24 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #28a745;
+            margin-top: 10px;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
         }
-        button:hover {
-            background-color: #218838;
+        .btn-login {
+            background-color: #e10600; 
+        }
+        .btn-login:hover {
+            background-color: #b30500;
+        }
+        .btn-register {
+            background-color: #15151e; 
+        }
+        .btn-register:hover {
+            background-color: #000000;
         }
         #message {
             text-align: center;
@@ -56,46 +65,71 @@
 <body>
 
 <div class="login-container">
-    <h2>Iniciar Sesión</h2>
-    <form id="loginForm">
+    <h2>Acceso al Paddock F1</h2>
+    <form id="authForm">
         <input type="text" id="username" placeholder="Usuario" required>
         <input type="password" id="password" placeholder="Contraseña" required>
-        <button type="submit">Entrar</button>
+        
+        <button type="submit" class="btn-login" id="loginBtn">Iniciar Sesión</button>
+        <button type="button" class="btn-register" id="registerBtn">Registrar Usuario</button>
     </form>
     <div id="message"></div>
 </div>
 
 <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const messageDiv = document.getElementById('message');
+    const form = document.getElementById('authForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const messageDiv = document.getElementById('message');
+    const registerBtn = document.getElementById('registerBtn');
 
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await authenticate('/api/auth/login');
+    });
+
+    
+    registerBtn.addEventListener('click', async () => {
+        if(!usernameInput.value || !passwordInput.value) {
+            messageDiv.style.color = 'red';
+            messageDiv.innerText = 'Llena ambos campos para registrarte.';
+            return;
+        }
+        await authenticate('/api/auth/register');
+    });
+
+    
+    async function authenticate(url) {
         try {
-            const response = await fetch('/api/auth/login', {
+            const response = await fetch(url, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    username: usernameInput.value, 
+                    password: passwordInput.value 
+                })
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                localStorage.setItem('token', data.token);
                 messageDiv.style.color = 'green';
-                messageDiv.innerText = '¡Login exitoso! Token guardado.';
+                if (url.includes('login')) {
+                    localStorage.setItem('token', data.token);
+                    messageDiv.innerText = '¡Login exitoso! Token guardado.';
+                } else {
+                    messageDiv.innerText = '¡Usuario registrado! Ahora puedes iniciar sesión.';
+                }
             } else {
                 messageDiv.style.color = 'red';
-                messageDiv.innerText = data.error || 'Error al iniciar sesión';
+                messageDiv.innerText = data.error || 'Ocurrió un error';
             }
         } catch (error) {
             messageDiv.style.color = 'red';
             messageDiv.innerText = 'Error de conexión con el servidor';
         }
-    });
+    }
 </script>
 
 </body>
