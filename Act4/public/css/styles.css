@@ -1,117 +1,118 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
 
 :root {
-    --f1-red: #e10600;
-    --f1-dark: #15151e;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --primary-red: #D50000;
+    --dark-grey: #2B2B2B;
+    --light-bg: #F8F9FA;
+    --white: #FFFFFF;
+    --border-color: #E5E7EB;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
 }
 
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--f1-dark);
-    background-image: radial-gradient(circle at top right, #2a2a35, var(--f1-dark));
-    color: white;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-main);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
 }
 
 
 .glass-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 15px;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
     padding: 40px;
     width: 100%;
-    max-width: 400px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    transition: transform 0.3s ease;
+    max-width: 420px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
-.glass-panel:hover {
-    transform: translateY(-5px);
+#dashboardSection.glass-panel {
+    max-width: 800px;
 }
 
 h1, h2 {
-    font-family: 'Racing Sans One', cursive;
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
-    letter-spacing: 2px;
-    color: white;
-    text-transform: uppercase;
+    color: var(--dark-grey);
+    margin: 0 0 10px 0;
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 5px;
-    text-shadow: 0 0 10px var(--f1-red);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 
 .input-group {
-    margin-bottom: 20px;
-    position: relative;
+    margin-bottom: 15px;
 }
 
 input {
     width: 100%;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    color: white;
-    font-size: 16px;
+    padding: 14px;
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-main);
+    font-size: 15px;
     box-sizing: border-box;
-    transition: all 0.3s ease;
+    transition: border-color 0.2s ease;
+    font-family: 'Inter', sans-serif;
 }
 
 input:focus {
     outline: none;
-    border-color: var(--f1-red);
-    box-shadow: 0 0 15px rgba(225, 6, 0, 0.3);
+    border-color: var(--primary-red);
 }
 
 
 .btn {
     width: 100%;
-    padding: 15px;
+    padding: 14px;
     border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
     cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    margin-bottom: 10px;
+    transition: background-color 0.2s ease;
+    margin-bottom: 12px;
+    font-family: 'Inter', sans-serif;
 }
 
 .btn-primary {
-    background: linear-gradient(45deg, var(--f1-red), #ff3333);
-    color: white;
-    box-shadow: 0 4px 15px rgba(225, 6, 0, 0.4);
+    background-color: var(--primary-red);
+    color: var(--white);
 }
 
 .btn-primary:hover {
-    box-shadow: 0 6px 20px rgba(225, 6, 0, 0.6);
-    transform: scale(1.02);
+    background-color: #B70000;
 }
 
 .btn-secondary {
-    background: transparent;
-    border: 1px solid white;
-    color: white;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    color: var(--dark-grey);
 }
 
 .btn-secondary:hover {
-    background: white;
-    color: var(--f1-dark);
+    background-color: var(--light-bg);
 }
 
 
@@ -119,6 +120,7 @@ input:focus {
     text-align: center;
     margin-top: 15px;
     font-size: 0.9rem;
+    font-weight: 500;
     min-height: 20px;
 }
 
@@ -131,16 +133,23 @@ input:focus {
 .f1-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .f1-table th, .f1-table td {
-    padding: 12px;
+    padding: 15px 10px;
     text-align: left;
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .f1-table th {
-    color: var(--f1-red);
-    font-family: 'Racing Sans One', cursive;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.f1-table td {
+    font-size: 0.95rem;
 }
