@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
-const productRoutes = require('./routes/productRoutes');
+const pilotoRoutes = require('./routes/pilotoRoutes');
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
+app.use('/api/pilotos', pilotoRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Conectado a MongoDB'))
