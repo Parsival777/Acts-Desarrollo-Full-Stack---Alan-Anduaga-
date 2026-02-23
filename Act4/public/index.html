@@ -3,134 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - F1 Paddock</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .btn-login {
-            background-color: #e10600; 
-        }
-        .btn-login:hover {
-            background-color: #b30500;
-        }
-        .btn-register {
-            background-color: #15151e; 
-        }
-        .btn-register:hover {
-            background-color: #000000;
-        }
-        #message {
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-    </style>
+    <title>F1 Paddock Pro | Ultimate Manager</title>
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
 
-<div class="login-container">
-    <h2>Acceso al Paddock F1</h2>
-    <form id="authForm">
-        <input type="text" id="username" placeholder="Usuario" required>
-        <input type="password" id="password" placeholder="Contraseña" required>
+    <div id="authSection" class="glass-panel">
+        <h1>F1 Paddock</h1>
+        <h2>Acceso VIP</h2>
+        <form id="authForm">
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Usuario / Piloto" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Contraseña de Telemetría" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="loginBtn">Iniciar Sesión</button>
+            <button type="button" class="btn btn-secondary" id="registerBtn">Registrar Credenciales</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <div id="dashboardSection" class="glass-panel hidden" style="max-width: 800px;">
+        <h1>Centro de Comando</h1>
+        <h2>Gestión de Pilotos</h2>
         
-        <button type="submit" class="btn-login" id="loginBtn">Iniciar Sesión</button>
-        <button type="button" class="btn-register" id="registerBtn">Registrar Usuario</button>
-    </form>
-    <div id="message"></div>
-</div>
+        <form id="pilotoForm" style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <input type="text" id="nombrePiloto" placeholder="Nombre del Piloto" required>
+            <input type="text" id="escuderiaPiloto" placeholder="Escudería (Ej. Ferrari)" required>
+            <input type="number" id="numeroPiloto" placeholder="N°" required style="width: 80px;">
+            <button type="submit" class="btn btn-primary" style="margin: 0; width: auto; padding: 0 20px;">Agregar</button>
+        </form>
 
-<script>
-    const form = document.getElementById('authForm');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const messageDiv = document.getElementById('message');
-    const registerBtn = document.getElementById('registerBtn');
+        <table class="f1-table">
+            <thead>
+                <tr>
+                    <th>Piloto</th>
+                    <th>Escudería</th>
+                    <th>Número</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="pilotosList">
+                </tbody>
+        </table>
+        
+        <button id="logoutBtn" class="btn btn-secondary" style="margin-top: 20px;">Cerrar Sesión</button>
+    </div>
 
-    
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await authenticate('/api/auth/login');
-    });
-
-    
-    registerBtn.addEventListener('click', async () => {
-        if(!usernameInput.value || !passwordInput.value) {
-            messageDiv.style.color = 'red';
-            messageDiv.innerText = 'Llena ambos campos para registrarte.';
-            return;
-        }
-        await authenticate('/api/auth/register');
-    });
-
-    
-    async function authenticate(url) {
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    username: usernameInput.value, 
-                    password: passwordInput.value 
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                messageDiv.style.color = 'green';
-                if (url.includes('login')) {
-                    localStorage.setItem('token', data.token);
-                    messageDiv.innerText = '¡Login exitoso! Token guardado.';
-                } else {
-                    messageDiv.innerText = '¡Usuario registrado! Ahora puedes iniciar sesión.';
-                }
-            } else {
-                messageDiv.style.color = 'red';
-                messageDiv.innerText = data.error || 'Ocurrió un error';
-            }
-        } catch (error) {
-            messageDiv.style.color = 'red';
-            messageDiv.innerText = 'Error de conexión con el servidor';
-        }
-    }
-</script>
-
+    <script src="./js/app.js"></script>
 </body>
 </html>
