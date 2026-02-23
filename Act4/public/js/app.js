@@ -13,6 +13,10 @@ const pilotoForm = document.getElementById('pilotoForm');
 const nombrePilotoInput = document.getElementById('nombrePiloto');
 const escuderiaPilotoInput = document.getElementById('escuderiaPiloto');
 const numeroPilotoInput = document.getElementById('numeroPiloto');
+
+const titulosPilotoInput = document.getElementById('titulosPiloto');
+const estadoPilotoInput = document.getElementById('estadoPiloto');
+
 const pilotosList = document.getElementById('pilotosList');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -51,10 +55,10 @@ async function procesarAuth(url) {
         if (response.ok) {
             if (url.includes('login')) {
                 localStorage.setItem('token', data.token);
-                mostrarMensaje('¡Acceso concedido! Entrando al Paddock...', '#28a745');
+                mostrarMensaje('¡Acceso concedido! Entrando al Paddock...', '#10B981');
                 setTimeout(() => mostrarDashboard(), 1000);
             } else {
-                mostrarMensaje('¡Credenciales registradas! Ahora inicia sesión.', '#007bff');
+                mostrarMensaje('¡Credenciales registradas! Ahora inicia sesión.', '#3B82F6');
             }
         } else {
             mostrarMensaje(data.error || 'Acceso denegado', 'red');
@@ -70,7 +74,7 @@ logoutBtn.addEventListener('click', () => {
     dashboardSection.classList.add('hidden');
     usernameInput.value = '';
     passwordInput.value = '';
-    mostrarMensaje('Sesión finalizada. Hasta la próxima carrera.', 'white');
+    mostrarMensaje('Sesión finalizada.', 'var(--text-muted)');
 });
 
 function mostrarMensaje(texto, color) {
@@ -88,10 +92,13 @@ pilotoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
 
+    
     const nuevoPiloto = {
         nombre: nombrePilotoInput.value,
         escuderia: escuderiaPilotoInput.value,
-        numero: parseInt(numeroPilotoInput.value)
+        numero: parseInt(numeroPilotoInput.value),
+        titulos: parseInt(titulosPilotoInput.value),
+        estado: estadoPilotoInput.value
     };
 
     try {
@@ -105,9 +112,12 @@ pilotoForm.addEventListener('submit', async (e) => {
         });
 
         if (response.ok) {
+            
             nombrePilotoInput.value = '';
             escuderiaPilotoInput.value = '';
             numeroPilotoInput.value = '';
+            titulosPilotoInput.value = '';
+            estadoPilotoInput.value = 'Activo';
             obtenerPilotos();
         } else {
             if(response.status === 401) return logoutForzado();
@@ -140,7 +150,7 @@ async function obtenerPilotos() {
 }
 
 async function eliminarPiloto(id) {
-    if (!confirm('¿Estás seguro de retirar a este piloto de la parrilla?')) return;
+    if (!confirm('¿Retirar piloto de la parrilla?')) return;
     
     const token = localStorage.getItem('token');
     
@@ -165,18 +175,24 @@ function renderizarTabla(pilotos) {
     pilotosList.innerHTML = '';
     
     if (pilotos.length === 0) {
-        pilotosList.innerHTML = '<tr><td colspan="4" style="text-align:center;">Parrilla vacía. ¡Agrega un piloto!</td></tr>';
+        pilotosList.innerHTML = '<tr><td colspan="6" style="text-align:center;">Parrilla vacía.</td></tr>';
         return;
     }
 
     pilotos.forEach(piloto => {
         const tr = document.createElement('tr');
+        
+        
+        const estadoColor = piloto.estado === 'Activo' ? '#10B981' : '#D50000';
+        
         tr.innerHTML = `
-            <td style="font-weight: bold;">${piloto.nombre}</td>
-            <td style="color: #aaa;">${piloto.escuderia}</td>
-            <td><span style="background: var(--f1-red); padding: 2px 8px; border-radius: 4px; font-weight:bold;">${piloto.numero}</span></td>
+            <td style="font-weight: 600;">${piloto.nombre}</td>
+            <td style="color: var(--text-muted);">${piloto.escuderia}</td>
+            <td><span style="background: var(--light-bg); padding: 4px 8px; border-radius: 4px; font-weight:600;">${piloto.numero}</span></td>
+            <td>🏆 ${piloto.titulos || 0}</td>
+            <td style="color: ${estadoColor}; font-weight: 600; font-size: 0.85rem;">${piloto.estado || 'Activo'}</td>
             <td>
-                <button onclick="eliminarPiloto('${piloto._id}')" class="btn btn-secondary" style="padding: 5px 10px; margin: 0; font-size: 12px; border-color: red; color: red;">Retirar</button>
+                <button onclick="eliminarPiloto('${piloto._id}')" class="btn btn-secondary" style="padding: 6px 10px; margin: 0; font-size: 12px; border-color: var(--border-color); color: var(--primary-red);">Retirar</button>
             </td>
         `;
         pilotosList.appendChild(tr);
@@ -184,6 +200,6 @@ function renderizarTabla(pilotos) {
 }
 
 function logoutForzado() {
-    alert('Tu pase VIP ha expirado. Por favor, inicia sesión nuevamente.');
+    alert('Sesión expirada. Por favor, inicia sesión nuevamente.');
     document.getElementById('logoutBtn').click();
 }
